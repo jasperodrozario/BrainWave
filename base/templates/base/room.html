@@ -1,8 +1,47 @@
 {% extends 'main.html' %} {% block content %}
 
-<h3>{{room.name}}</h3>
+<style>
+  .main-container {
+    display: grid;
+    grid-template-columns: 3fr, 1fr;
+  }
+</style>
+
+<h2>{{room.name}}</h2>
 <p>{{room.description}}</p>
+
+{% if request.user == room.host %}
 <a href="{% url 'update-room' room.id %}">Edit</a> |
 <a href="{% url 'delete-room' room.id %}">Delete</a>
+{% endif %}
+
+<div class="main-container">
+  <div class="comments-wrapper">
+    <h3>Conversations</h3>
+    <hr />
+    {% for message in room_messages %}
+    <div>
+      <small>@{{message.user}} | {{message.created|timesince}} ago </small>
+      <p>{{message}}</p>
+      <hr />
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if request.user.is_authenticated %}
+  <div class="comment-form">
+    <form method="POST" action="">
+      {% csrf_token %}
+      <input name="message_box" type="text" placeholder="Write a message..." />
+      <input type="submit" value="Submit" />
+    </form>
+  </div>
+  {% endif %}
+
+  <div class="participants-container">
+    <h3>Participants</h3>
+    <hr />
+  </div>
+</div>
 
 {% endblock %}
