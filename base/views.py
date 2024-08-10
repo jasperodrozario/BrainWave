@@ -65,11 +65,18 @@ def home(request):
     Q(topic__name__icontains = q) | 
     Q(name__icontains = q) | 
     Q(description__icontains = q)
-    )
-  
+  )
   room_count = rooms.count()
+
+  #filtering messages based on queried rooms
+  filtered_room_messages = []
+  for room in rooms:
+    room_messages = Message.objects.filter(room=room)
+    filtered_room_messages.extend(room_messages)
+  filtered_room_messages.sort(key=lambda event: event.created, reverse=True)
+
   topics = Topic.objects.all()
-  context = {'rooms': rooms, 'topics': topics, 'room_count': room_count}
+  context = {'rooms': rooms, 'topics': topics, 'room_count': room_count, 'room_messages': filtered_room_messages}
   return render(request, 'base/home.html', context)
 
 def room(request, pk):
@@ -85,7 +92,7 @@ def room(request, pk):
     room.participants.add(request.user)
     return redirect('room', pk=room.id)
   
-  room_messages = room.message_set.all().order_by('-created')
+  room_messages = room.message_set.all()
   context = {'room': room, 'room_messages': room_messages, 'participants': participants}
   return render(request, 'base/room.html', context)
 
