@@ -1,21 +1,21 @@
 {% extends 'main.html' %} {% block content %}
 
-<style>
-  .home-container {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-  }
-</style>
+<div class="flex">
+  <div class="flex-auto w-14 mx-2.5">
+    {% include 'base/topics_component.html' %}
+  </div>
 
-<div class="home-container">
-  {% include 'base/topics_component.html' %}
-
-  <div>
+  <div class="flex-auto w-64 mx-2.5">
     <h5>{{room_count}} room(s) available</h5>
-    <h4><a href="{% url 'create-room' %}">Create Room</a></h4>
+    {% if request.user.is_authenticated %}
+      <h4><a href="{% url 'create-room' %}">Create Room</a></h4>
+    {% endif %}
     {% include 'base/feed_component.html' %}
   </div>
 
-  {% include 'base/activity_log_component.html' %}
+  <div class="flex-auto w-32 mx-2.5">
+    {% include 'base/activity_log_component.html' %}
+  </div>
 </div>
+
 {% endblock %}

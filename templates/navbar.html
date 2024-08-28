@@ -1,13 +1,23 @@
-<a href="{% url 'home'%}">
-  <h2>LOGO</h2>
-</a>
+<div class="bg-[#3F4054]">
+  <div class="logo-container">
+    <a href="{% url 'home'%}">
+      <h2>BrainWave</h2>
+    </a>
+  </div>
 
-<form method="GET" action="{% url 'home' %}">
-  <input type="text" name="q" placeholder="Search Rooms..." />
-</form>
-{% if request.user.is_authenticated %}
-<h4><a href="{% url 'logout' %}">Logout</a></h4>
-{% else %}
-<h4><a href="{% url 'login' %}">Login</a></h4>
-{% endif %}
-<hr />
+  <div class="searchbar-container">
+    <form method="GET" action="{% url 'home' %}">
+      <input type="text" name="q" placeholder="Search Rooms..." />
+    </form>
+  </div>
+
+  {% if request.user.is_authenticated %}
+  <div class="profile-container">
+    <h4><a href="{% url 'logout' %}">Logout</a></h4>
+  </div>
+  {% else %}
+  <div class="profile-container">
+    <h4><a href="{% url 'login' %}">Login</a></h4>
+  </div>
+  {% endif %}
+</div>
