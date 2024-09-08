@@ -7,11 +7,12 @@
     <title>Discord Clone</title>
     <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
   </head>
-  <body class="bg-[#2C2C37]">
+  <body class="subpixel-antialiased bg-theme-primary pt-[4rem]">
     <!-- Navbar -->
-    {% include 'navbar.html' %} {% if messages %} {% for message in messages %}
-    {{ message }} {% endfor %} {% endif %}
+    <nav class="fixed top-0 w-full z-[1000]">{% include 'navbar.html' %}</nav>
+    {% if messages %} {% for message in messages %} {{ message }} {% endfor %}
+    {% endif %}
     <!-- Content -->
-    {% block content %} {% endblock %}
+    <div class="mt-[1.5rem]">{% block content %} {% endblock %}</div>
   </body>
 </html>

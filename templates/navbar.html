@@ -1,23 +1,32 @@
-<div class="bg-[#3F4054]">
-  <div class="logo-container">
+<div class="flex justify-between items-center h-15 py-3 bg-theme-secondary">
+  <div class="flex-none mx-[5rem]">
     <a href="{% url 'home'%}">
-      <h2>BrainWave</h2>
+      <p class="font-bold text-lg text-[#D8DAE8]">BrainWave</p>
     </a>
   </div>
 
-  <div class="searchbar-container">
+  <div class="flex-none min-w-96">
     <form method="GET" action="{% url 'home' %}">
-      <input type="text" name="q" placeholder="Search Rooms..." />
+      <input
+        class="h-9 w-full rounded-sm px-5 py-3 text-xs placeholder-subtle-white/25 bg-[#52526D]"
+        type="text"
+        name="q"
+        placeholder="Search for posts"
+      />
     </form>
   </div>
 
   {% if request.user.is_authenticated %}
-  <div class="profile-container">
-    <h4><a href="{% url 'logout' %}">Logout</a></h4>
+  <div class="flex-none px-4 py-2 rounded-sm mx-[5rem] bg-[#52526D]">
+    <a href="{% url 'logout' %}">
+      <p class="text-neutral-300 text-center text-wrap font-semibold">Logout</p>
+    </a>
   </div>
   {% else %}
-  <div class="profile-container">
-    <h4><a href="{% url 'login' %}">Login</a></h4>
+  <div class="flex-none px-4 py-2 rounded-sm mx-[5rem] bg-[#52526D]">
+    <p class="text-neutral-300 text-center text-wrap font-semibold">
+      <a href="{% url 'login' %}">Login</a>
+    </p>
   </div>
   {% endif %}
 </div>

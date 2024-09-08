@@ -1,16 +1,18 @@
-{% extends 'main.html' %}
-{% block content %}
-  <style>
-    .profile-container{
-      display: grid;
-      grid-template-columns: 1fr 3fr 1fr;
-    }
-  </style>
+{% extends 'main.html' %} {% block content %}
+<div class="flex justify-center">
+  <!-- user details section -->
+  <div class="fixed left-0 ml-[5rem] mr-[1rem] w-[15rem]">
+    {% include 'base/profile_details_component.html' %}
+  </div>
 
-  <h2>{{user.username}}</h2>
-  <div class="profile-container">
-    {% include 'base/topics_component.html' %}
+  <!-- user rooms section -->
+  <div class="flex-none w-[35rem]">
     {% include 'base/feed_component.html' %}
+  </div>
+
+  <!-- user activity-log section -->
+  <div class="fixed right-0 ml-[1rem] mr-[5rem] w-[15rem]">
     {% include 'base/activity_log_component.html' %}
   </div>
+</div>
 {% endblock content %}

@@ -1,11 +1,59 @@
+<div class="flex justify-between">
+  <div class="flex-none">
+    <p class="text-subtle-white text-sm font-medium">STUDY ROOM</p>
+    {% if room_count > 1 %}
+    <p class="text-xs font-bold text-[#4B4A5D]">
+      {{room_count}} rooms available
+    </p>
+    {% elif room_count == 1 %}
+    <p class="text-xs font-bold text-[#4B4A5D]">1 room available</p>
+    {% else %}
+    <p class="text-xs font-bold text-[#4B4A5D]">No rooms available</p>
+    {% endif %}
+  </div>
+  <a href="{% url 'create-room' %}">
+    <div class="flex-none rounded-full bg-orange-500">
+      {% if request.user.is_authenticated %}
+      <p class="text-sm font-semibold px-3 py-2 text-center text-subtle-white">
+        + Create Room
+      </p>
+      {% endif %}
+    </div>
+  </a>
+</div>
+
 {% for room in rooms %}
-<div class="">
-  <h4><a href="{% url 'room' room.id %}">{{room.name}}</a></h4>
-  <span
-    >-- by
-    <a href="{% url 'user-profile' room.host.id %}">@{{room.host.username}}</a>
-    |
-  </span>
-  <small>{{room.topic.name}}</small>
+<div
+  class="my-5 py-3 px-4 rounded-md bg-theme-secondary hover:scale-[1.02] transition-transform duration-300"
+>
+  <div class="flex justify-between">
+    <p class="mb-5 text-subtle-white text-lg font-semibold hover:underline">
+      <a href="{% url 'room' room.id %}">{{room.name}}</a>
+    </p>
+    <p class="mb-3 text-xs font-medium text-subtle-white">
+      {{room.participants.all|length}} Joined
+    </p>
+  </div>
+
+  <div>
+    <p class="mb-3 text-xs text-subtle-white">
+      {{room.description|truncatechars:100}}
+    </p>
+    <hr class="border-t-[1px] border-subtle-purple" />
+  </div>
+
+  <div class="flex justify-between mt-3">
+    <div class="flex-none">
+      <p class="text-orange-400 text-xs hover:underline">
+        <a href="{% url 'user-profile' room.host.id %}"
+          >@{{room.host.username}}</a
+        >
+      </p>
+    </div>
+
+    <div class="flex-none px-3 py-1 rounded-xl bg-[#525369]">
+      <p class="text-subtle-white/75 text-xs font-bold">{{room.topic.name}}</p>
+    </div>
+  </div>
 </div>
 {% endfor %}

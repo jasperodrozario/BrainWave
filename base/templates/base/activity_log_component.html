@@ -1,18 +1,32 @@
-<h3>Recent Activity</h3>
-<hr />
-{% for message in room_messages %}
-<div>
-  <small>
-    <a href="{% url 'user-profile' message.user.id %}">@{{message.user}}</a>
-    {{message.created|timesince}} ago
-  </small>
-  <br />
-  <small>
-    Replied to post "<a href="{% url 'room' message.room.id %}"
-      >{{message.room}}</a
-    >"
-  </small>
-  <p class="text-red-400">{{message}}</p>
-  <hr />
+<div
+  class="overflow-y-auto scrollbar-thin rounded h-[520px] bg-theme-secondary"
+>
+  <p class="text-xs font-medium px-3 py-2 text-subtle-white bg-[#6A6A95]">
+    {% if flag %}
+      RECENT ACTIVITIES - ALL
+    {% else %}
+      RECENT ACTIVITIES - @{{user.username}}
+    {% endif %}
+  </p>
+  <div class="overflow-y">
+    {% for message in room_messages %}
+    <div class="rounded border-subtle-purple p-2 m-3 border-[0.3px]">
+      <p class="text-xs text-orange-400">
+        <a href="{% url 'user-profile' message.user.id %}">@{{message.user}}</a>
+      </p>
+      <p class="text-xs text-[#78777C] font-medium">
+        {{message.created|timesince}} ago
+      </p>
+      <p class="text-xs text-subtle-white/75">
+        replied to room: <br />
+        "<a class="text-orange-400" href="{% url 'room' message.room.id %}"
+          >{{message.room}}</a
+        >"
+      </p>
+      <div class="mx-[3px] mt-2 p-2 rounded bg-theme-primary">
+        <p class="text-xs text-subtle-white/75">{{message}}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 </div>
-{% endfor %}

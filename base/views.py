@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import RoomForm
 from .models import Room, Topic, Message
+from urllib.parse import unquote_plus
 
 # Create your views here.
 
@@ -60,13 +61,29 @@ def registerUser(request):
   return render(request, 'base/login_form.html', context)
 
 def home(request):
+  total_room_count = Room.objects.count()
   q = request.GET.get('q') if request.GET.get('q') != None else ''
+  if len(q)>0 and ' ' in q[-1]:
+    q = q.replace(' ', '+')
+  print(q)
   rooms = Room.objects.filter(
     Q(topic__name__icontains = q) | 
     Q(name__icontains = q) | 
     Q(description__icontains = q)
   )
   room_count = rooms.count()
+
+  if q == '':
+    selected_topic = ''
+  else:
+    selected_topic = Topic.objects.filter(
+      Q(name__icontains = q)
+    )
+    if selected_topic.count() == 1:
+      selected_topic = selected_topic[0].name
+    else:
+      selected_topic = None
+  print(selected_topic)
 
   #filtering messages based on queried rooms
   filtered_room_messages = []
@@ -76,7 +93,8 @@ def home(request):
   filtered_room_messages.sort(key=lambda event: event.created, reverse=True)
 
   topics = Topic.objects.all()
-  context = {'rooms': rooms, 'topics': topics, 'room_count': room_count, 'room_messages': filtered_room_messages}
+  isHomePage = True
+  context = {'rooms': rooms, 'topics': topics, 'total_room_count': total_room_count, 'room_count': room_count, 'room_messages': filtered_room_messages, 'flag': isHomePage, 'selected_topic': selected_topic,}
   return render(request, 'base/home.html', context)
 
 def room(request, pk):
@@ -99,9 +117,10 @@ def room(request, pk):
 def userProfile(request, pk):
   user = User.objects.get(id=pk)
   user_rooms = user.room_set.all()
+  room_count = user_rooms.count()
   room_messages = user.message_set.all()
-  topics = Topic.objects.all()
-  context = {'user': user, 'rooms': user_rooms, 'room_messages': room_messages, 'topics': topics}
+  isHomePage = False
+  context = {'user': user, 'rooms': user_rooms, 'room_messages': room_messages, 'room_count': room_count, 'flag': isHomePage }
   return render(request, 'base/profile.html', context)
 
 @login_required(login_url='login')

@@ -1,19 +1,15 @@
 {% extends 'main.html' %} {% block content %}
 
-<div class="flex">
-  <div class="flex-auto w-14 mx-2.5">
+<div class="flex justify-center">
+  <div class="fixed left-0 ml-[5rem] w-[15rem]">
     {% include 'base/topics_component.html' %}
   </div>
 
-  <div class="flex-auto w-64 mx-2.5">
-    <h5>{{room_count}} room(s) available</h5>
-    {% if request.user.is_authenticated %}
-      <h4><a href="{% url 'create-room' %}">Create Room</a></h4>
-    {% endif %}
+  <div class="flex-none w-[35rem]">
     {% include 'base/feed_component.html' %}
   </div>
 
-  <div class="flex-auto w-32 mx-2.5">
+  <div class="fixed right-0 mr-[5rem] w-[15rem]">
     {% include 'base/activity_log_component.html' %}
   </div>
 </div>
