@@ -8,7 +8,7 @@
     <p class="text-subtle-white">{{total_room_count}}</p>
   </div>
   {% else %}
-  <a href="{% url 'home' %}">All</a>
+  <a class="hover:text-orange-400/75" href="{% url 'home' %}">All</a>
   <div
     class="flex bg-[#3F4154] items-center justify-center rounded-sm w-[2.6rem] h-[1.6rem]"
   >
@@ -16,7 +16,9 @@
   </div>
   {% endif %}
 </div>
+
 {% for topic in topics %}
+
 <div class="flex justify-between text-sm font-medium mb-6 text-subtle-white/50">
   {% if topic.name == selected_topic %}
   <a class="text-orange-400" href="{% url 'home' %}?q={{topic.name}}"
@@ -28,7 +30,9 @@
     <p class="text-subtle-white">{{topic.rooms.all|length}}</p>
   </div>
   {% else %}
-  <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
+  <a class="hover:text-orange-400/75" href="{% url 'home' %}?q={{topic.name}}"
+    >{{topic.name}}</a
+  >
   <div
     class="flex bg-[#3F4154] items-center justify-center rounded-sm w-[2.6rem] h-[1.6rem]"
   >

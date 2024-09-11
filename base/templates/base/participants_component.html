@@ -1,0 +1,16 @@
+<div
+  class="overflow-y-auto scrollbar-thin rounded bg-theme-secondary h-[520px]"
+>
+  <div class="flex font-medium text-xs px-3 py-2 bg-light-lavender">
+    <p class="text-subtle-white bg-light-lavender mr-1">PARTICIPANTS</p>
+    <p class="text-orange-400">({{participant_count}} joined)</p>
+  </div>
+
+  <hr />
+  <div class="">
+    {% for participant in participants %}
+    <p class="text-subtle-white p-1">{{participant.first_name}}</p>
+    <p class="text-orange-400">@{{participant}}</p>
+    {% endfor %}
+  </div>
+</div>

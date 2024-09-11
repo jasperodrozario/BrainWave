@@ -1,58 +1,20 @@
 {% extends 'main.html' %} {% block content %}
 
-<style>
-  .room-container {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-  }
-</style>
+<!-- <h2>{{room.name}}</h2>
+<p>{{room.description}}</p>
 
-<div class="room-container">
-  <div class="comments-container">
-    <h2>{{room.name}}</h2>
-    <p>{{room.description}}</p>
+{% if request.user == room.host %}
+<a href="{% url 'update-room' room.id %}">Edit</a> |
+<a href="{% url 'delete-room' room.id %}">Delete</a>
+{% endif %} -->
 
-    {% if request.user == room.host %}
-    <a href="{% url 'update-room' room.id %}">Edit</a> |
-    <a href="{% url 'delete-room' room.id %}">Delete</a>
-    {% endif %}
+<div class="flex justify-center">
+  <!-- Conversation container -->
+  <div class="flex-none">{% include 'base/conversation_component.html' %}</div>
 
-    <div class="comments-wrapper">
-      <h3>Conversations</h3>
-      <hr />
-      {% for message in room_messages %}
-      <div>
-        {% if request.user == message.user %}
-        <a href="{% url 'delete-message' message.id%}">Delete</a>
-        {% endif %}
-        <small>@{{message.user}} | {{message.created|timesince}} ago </small>
-        <p>{{message}}</p>
-        <hr />
-      </div>
-      {% endfor %}
-    </div>
-
-    {% if request.user.is_authenticated %}
-    <div class="comment-form">
-      <form method="POST" action="">
-        {% csrf_token %}
-        <input
-          name="message_box"
-          type="text"
-          placeholder="Write a message..."
-        />
-        <input type="submit" value="Submit" />
-      </form>
-    </div>
-    {% endif %}
-  </div>
-
-  <div class="bg-light-lavender">
-    <h3>Participants</h3>
-    <hr />
-    {% for participant in participants %}
-    <p>{{participant}}</p>
-    {% endfor %}
+  <!-- Participants container -->
+  <div class="fixed h-full w-[200px] right-[5rem]">
+    {% include 'base/participants_component.html' %}
   </div>
 </div>
 

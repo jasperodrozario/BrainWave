@@ -1,12 +1,9 @@
 <div
   class="overflow-y-auto scrollbar-thin rounded h-[520px] bg-theme-secondary"
 >
-  <p class="text-xs font-medium px-3 py-2 text-subtle-white bg-[#6A6A95]">
-    {% if flag %}
-      RECENT ACTIVITIES - ALL
-    {% else %}
-      RECENT ACTIVITIES - @{{user.username}}
-    {% endif %}
+  <p class="text-xs font-medium px-3 py-2 text-subtle-white bg-light-lavender">
+    {% if flag %} RECENT ACTIVITIES - ALL {% else %} RECENT ACTIVITIES -
+    @{{user.username}} {% endif %}
   </p>
   <div class="overflow-y">
     {% for message in room_messages %}

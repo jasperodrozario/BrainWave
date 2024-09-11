@@ -1,0 +1,26 @@
+<div class="bg-theme-secondary">
+  <div>
+    <h3>Conversations</h3>
+    <hr />
+    {% for message in room_messages %}
+    <div>
+      {% if request.user == message.user %}
+      <a href="{% url 'delete-message' message.id%}">Delete</a>
+      {% endif %}
+      <small>@{{message.user}} | {{message.created|timesince}} ago </small>
+      <p>{{message}}</p>
+      <hr />
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if request.user.is_authenticated %}
+  <div class="comment-form">
+    <form method="POST" action="">
+      {% csrf_token %}
+      <input name="message_box" type="text" placeholder="Write a message..." />
+      <input type="submit" value="Submit" />
+    </form>
+  </div>
+  {% endif %}
+</div>
