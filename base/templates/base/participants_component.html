@@ -1,16 +1,24 @@
-<div
-  class="overflow-y-auto scrollbar-thin rounded bg-theme-secondary h-[520px]"
->
-  <div class="flex font-medium text-xs px-3 py-2 bg-light-lavender">
-    <p class="text-subtle-white bg-light-lavender mr-1">PARTICIPANTS</p>
+<div class="overflow-y-auto scrollbar-thin rounded bg-theme-secondary">
+  <div class="flex font-bold text-xs px-3 py-2 bg-light-lavender">
+    <p class="text-subtle-white bg-light-lavender mr-1 tracking-wide">
+      PARTICIPANTS
+    </p>
     <p class="text-orange-400">({{participant_count}} joined)</p>
   </div>
 
   <hr />
-  <div class="">
-    {% for participant in participants %}
-    <p class="text-subtle-white p-1">{{participant.first_name}}</p>
-    <p class="text-orange-400">@{{participant}}</p>
-    {% endfor %}
+  {% for participant in participants %}
+  <div class="m-3">
+    <img src="" alt="" />
+    <p class="text-sm text-subtle-white">
+      <a
+        href="{% url 'user-profile' participant.id %}"
+        class="text-sm text-orange-400"
+      >
+        @{{participant}}
+      </a>
+      ({{participant.first_name}} {{participant.last_name}})
+    </p>
   </div>
+  {% endfor %}
 </div>

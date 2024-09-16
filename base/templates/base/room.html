@@ -1,19 +1,18 @@
 {% extends 'main.html' %} {% block content %}
 
-<!-- <h2>{{room.name}}</h2>
-<p>{{room.description}}</p>
-
-{% if request.user == room.host %}
-<a href="{% url 'update-room' room.id %}">Edit</a> |
-<a href="{% url 'delete-room' room.id %}">Delete</a>
-{% endif %} -->
-
 <div class="flex justify-center">
+  <!-- Room details container -->
+  <div class="fixed left-[5rem] w-[250px]">
+    {% include 'base/room_details_component.html' %}
+  </div>
+
   <!-- Conversation container -->
-  <div class="flex-none">{% include 'base/conversation_component.html' %}</div>
+  <div class="flex-none overflow-hidden rounded-lg mx-auto h-[35.5rem] w-[45%]">
+    {% include 'base/conversation_component.html' %}
+  </div>
 
   <!-- Participants container -->
-  <div class="fixed h-full w-[200px] right-[5rem]">
+  <div class="fixed right-[5rem] w-[250px]">
     {% include 'base/participants_component.html' %}
   </div>
 </div>

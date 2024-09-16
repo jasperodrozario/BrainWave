@@ -1,22 +1,19 @@
 <div class="flex justify-between">
   <div class="flex-none">
-    
     {% if not flag %}
-      <p class="text-subtle-white text-sm font-medium">
-        STUDY ROOM - HOSTED BY @{{ user.username }}
-      </p>
+    <p class="text-subtle-white text-sm font-medium">
+      STUDY ROOM (@{{ user.username }})
+    </p>
     {% else %}
-      <p class="text-subtle-white text-sm font-medium">STUDY ROOM</p>
-    {% endif %}
-
-    {% if room_count > 1 %}
-      <p class="text-xs font-bold text-[#4B4A5D]">
-        {{room_count}} rooms available
-      </p>
+    <p class="text-subtle-white text-sm font-medium">STUDY ROOM</p>
+    {% endif %} {% if room_count > 1 %}
+    <p class="text-xs font-bold text-[#4B4A5D]">
+      {{room_count}} rooms available
+    </p>
     {% elif room_count == 1 %}
-      <p class="text-xs font-bold text-[#4B4A5D]">1 room available</p>
+    <p class="text-xs font-bold text-[#4B4A5D]">1 room available</p>
     {% else %}
-      <p class="text-xs font-bold text-[#4B4A5D]">No rooms available</p>
+    <p class="text-xs font-bold text-[#4B4A5D]">No rooms available</p>
     {% endif %}
   </div>
   <a href="{% url 'create-room' %}">

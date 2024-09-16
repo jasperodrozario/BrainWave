@@ -111,7 +111,7 @@ def room(request, pk):
     room.participants.add(request.user)
     return redirect('room', pk=room.id)
   
-  room_messages = room.message_set.all()
+  room_messages = room.message_set.order_by('updated', 'created')
   context = {'room': room, 'room_messages': room_messages, 'participants': participants, 'participant_count': participant_count}
   return render(request, 'base/room.html', context)
 
@@ -120,8 +120,8 @@ def userProfile(request, pk):
   user_rooms = user.room_set.all()
   room_count = user_rooms.count()
   room_messages = user.message_set.all()
-  isProfilePage = False
-  context = {'user': user, 'rooms': user_rooms, 'room_messages': room_messages, 'room_count': room_count, 'flag': isProfilePage}
+  isHomePage = False
+  context = {'user': user, 'rooms': user_rooms, 'room_messages': room_messages, 'room_count': room_count, 'flag': isHomePage}
   return render(request, 'base/profile.html', context)
 
 @login_required(login_url='login')

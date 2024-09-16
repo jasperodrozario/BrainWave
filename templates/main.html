@@ -7,12 +7,18 @@
     <title>Discord Clone</title>
     <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
   </head>
-  <body class="subpixel-antialiased bg-theme-primary pt-[4rem]">
+  <body class="subpixel-antialiased bg-theme-primary pt-[6rem]">
     <!-- Navbar -->
     <nav class="fixed top-0 w-full z-[1000]">{% include 'navbar.html' %}</nav>
     {% if messages %} {% for message in messages %} {{ message }} {% endfor %}
     {% endif %}
     <!-- Content -->
-    <div class="mt-[1.5rem]">{% block content %} {% endblock %}</div>
+    <div>{% block content %} {% endblock %}</div>
+    <script>
+      window.onload = function () {
+        var div = document.getElementById("scrollableDiv");
+        div.scrollTop = div.scrollHeight; // Scroll to the bottom
+      };
+    </script>
   </body>
 </html>
