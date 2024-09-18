@@ -15,28 +15,22 @@
   <div class="rounded-md p-2 bg-[#2C2C37]">
     <div class="m-1 mb-5">
       <p class="text-subtle-white font-bold text-xs">USERNAME</p>
-      <p class="text-subtle-white font-md text-md">@{{user.username}}</p>
+      <p class="text-subtle-white">@{{user.username}}</p>
     </div>
 
     <div class="m-1 mb-5">
       <p class="text-subtle-white font-bold text-xs">FIRST NAME</p>
-      <p class="text-subtle-white font-md text-md">
-        {{ user.first_name|default:"-" }}
-      </p>
+      <p class="text-subtle-white">{{ user.first_name|default:"-" }}</p>
     </div>
 
     <div class="m-1 mb-5">
       <p class="text-subtle-white font-bold text-xs">LAST NAME</p>
-      <p class="text-subtle-white font-md text-md">
-        {{ user.last_name|default:"-" }}
-      </p>
+      <p class="text-subtle-white">{{ user.last_name|default:"-" }}</p>
     </div>
 
     <div class="m-1 text-wrap">
       <p class="text-subtle-white font-bold text-xs">EMAIL</p>
-      <p class="text-subtle-white font-md text-md">
-        {{ user.email|default:"-" }}
-      </p>
+      <p class="text-subtle-white">{{ user.email|default:"-" }}</p>
     </div>
   </div>
 </div>

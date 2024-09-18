@@ -3,7 +3,7 @@
   {% if selected_topic == '' %}
   <a class="text-orange-400" href="{% url 'home' %}">All</a>
   <div
-    class="flex bg-orange-400 items-center justify-center rounded-sm w-[2.6rem] h-[1.6rem]"
+    class="flex bg-orange-500 items-center justify-center rounded-sm w-[2.6rem] h-[1.6rem]"
   >
     <p class="text-subtle-white">{{total_room_count}}</p>
   </div>
@@ -25,7 +25,7 @@
     >{{topic.name}}</a
   >
   <div
-    class="flex bg-orange-400 items-center justify-center rounded-sm w-[2.6rem] h-[1.6rem]"
+    class="flex bg-orange-500 items-center justify-center rounded-sm w-[2.6rem] h-[1.6rem]"
   >
     <p class="text-subtle-white">{{topic.rooms.all|length}}</p>
   </div>

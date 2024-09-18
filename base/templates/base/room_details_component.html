@@ -1,16 +1,29 @@
 <div class="rounded-md p-3 bg-theme-secondary">
   <div class="flex justify-between items-center mb-3">
-    <div class="pl-1">
+    <div>
       <img src="" alt="" />
-      <p class="text-subtle-white font-semibold text-lg">{{room.name}}</p>
+      <p class="text-subtle-white font-bold text-lg">{{room.name}}</p>
     </div>
-    <a href="{% url 'home' %}">
+    <a href="{% url 'update-room' room.id %}">
       <div
-        class="flex p-1 bg-orange-500 justify-center items-center h-[30px] w-[60px] rounded-[3px]"
+        class="flex bg-orange-500 justify-center items-center ml-3 h-[30px] w-[60px] rounded-[3px]"
       >
-        <p class="text-sm font-medium text-subtle-white">Edit</p>
+        <p class="text-sm font-semibold text-subtle-white">Edit</p>
       </div>
     </a>
   </div>
-  <div class="rounded-md p-2 bg-[#2C2C37]"></div>
+  <div class="rounded-md p-2 bg-[#2C2C37]">
+    <div class="m-1 mb-5">
+      <p class="text-subtle-white font-bold text-xs mb-1">DESCRIPTION</p>
+      <p class="text-subtle-white leading-none">{{room.description}}</p>
+    </div>
+    <div class="m-1 mb-5">
+      <p class="text-subtle-white font-bold text-xs mb-1">CREATOR</p>
+      <p class="text-subtle-white leading-none">
+        <a href="{% url 'user-profile' room.host.id %}" class="text-orange-400"
+          >@{{room.host}}</a
+        >
+      </p>
+    </div>
+  </div>
 </div>

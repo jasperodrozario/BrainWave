@@ -1,26 +1,42 @@
-{% extends 'main.html' %} {% block content %} {% if page == 'login' %}
-<div>
-  <form method="POST" action="">
-    {% csrf_token %}
-    <label>Username:</label>
-    <input type="text" name="username" placeholder="Enter Username" />
-    <label>Password:</label>
-    <input type="password" name="password" placeholder="Enter Password" />
-    <input type="submit" value="Login" />
-  </form>
-  <p>Need an account?</p>
-  <a href="{% url 'register' %}">Sign up</a>
+{% extends 'main.html' %} {% block content %} {% load widget_tweaks %} 
+{% if page == 'login' %}
+<div class="flex justify-center mt-[4%]">
+  <div class="bg-theme-secondary px-5 py-5 rounded-lg text-sm text-subtle-white font-semibold">
+    <h2 class="text-subtle-white text-xl font-bold mb-5">Login to brainwave</h2>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="my-3">
+        <label>Username</label>
+        <div class="mt-2">
+          <input type="text" name="username" placeholder="Enter Username" class="w-64 py-2 px-3 bg-theme-primary font-light text-subtle-white/75 border rounded "/>
+        </div>
+      </div>
+      <div class="my-3">
+        <label>Password</label>
+        <div class="mt-2">
+          <input type="password" name="password" placeholder="Enter Password" class="w-64 py-2 px-3 bg-theme-primary font-light text-subtle-white/75 border rounded "/>
+        </div>
+      </div>
+      <div class="text-center">
+        <input
+          class="text-subtle-white text-sm bg-orange-500 rounded my-3 w-full h-[35px]"
+          type="submit"
+          value="Login"
+        />
+        <p class="mt-4">Need an account? <a href="{% url 'register' %}" class="text-orange-400 text-sm font-light hover:underline">Sign up</a></p>
+      </div>
+    </form>
+  </div>
 </div>
-
 {% else %}
-
-<div>
-  <form method="POST" action="">
-    {% csrf_token %} {{form.as_p}}
-    <input type="submit" value="Sign up" />
-  </form>
-  <p>Already have an account?</p>
-  <a href="{% url 'login' %}">Login</a>
+<div class="flex justify-center mt-[4%]">
+  <div>
+    <form method="POST" action="">
+      {% csrf_token %} {{form.as_p}}
+      <input type="submit" value="Sign up" />
+    </form>
+    <p>Already have an account?</p>
+    <a href="{% url 'login' %}">Login</a>
+  </div>
 </div>
-
 {% endif %} {% endblock content %}

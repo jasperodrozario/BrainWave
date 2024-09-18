@@ -1,10 +1,34 @@
-{% extends 'main.html' %} {% block content %}
+{% extends 'main.html' %} {% block content %} {% load widget_tweaks %}
 
-<div>
-  <form method="POST" action="">
-    {% csrf_token %} {{form.as_p}}
-    <input type="submit" value="Submit" />
-  </form>
+<div class="flex justify-center mt-[4%]">
+  <div class="bg-theme-secondary px-5 py-3 rounded">
+    <form method="POST">
+      {% csrf_token %}
+  
+      <div class="my-3">
+        <label for="id_topic" class="text-sm text-subtle-white font-semibold">Topic</label>
+        <div class="mt-2">
+          {{ form.topic|add_class:"py-2 px-3 bg-theme-primary text-subtle-white/75 border rounded" }} {{ form.topic.errors }}
+        </div>
+      </div>
+  
+      <div class="my-3">
+        <label for="id_name" class="text-sm text-subtle-white font-semibold">Name</label>
+        <div class="mt-2">{{ form.name|add_class:"py-2 px-3 bg-theme-primary text-subtle-white/75 border rounded" }} {{ form.name.errors }}</div>
+      </div>
+  
+      <div class="my-3">
+        <label for="id_description" class="text-sm text-subtle-white font-semibold">Description</label>
+        <div class="mt-2">
+          {{ form.description|add_class:"py-2 px-3 bg-theme-primary text-subtle-white/75 border rounded h-[100px]" }} {{ form.description.errors}}
+        </div>
+      </div>
+
+      <div class="flex justify-center">      
+        <button type="submit" class="text-subtle-white text-sm font-semibold bg-orange-500 rounded my-3 h-[35px] w-[90px]">Save</button>
+      </div>
+    </form>
+  </div>
 </div>
 
 {% endblock content %}

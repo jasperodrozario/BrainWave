@@ -2,7 +2,7 @@
   <div class="px-4 py-2 bg-light-lavender">
     <h3 class="text-lg">Conversations</h3>
   </div>
-  <div id="scrollableDiv" class="relative overflow-y-auto h-[82%] px-4 pt-3">
+  <div id="scrollableDiv" class="relative overflow-y-auto h-[82%] px-4 pt-5">
     {% for message in room_messages %}
     <div>
       {% if request.user == message.user %}
@@ -26,7 +26,7 @@
         class="flex-none rounded text-md w-full p-2 pl-4 h-10 bg-[#52526D]"
         name="message_box"
         type="text"
-        placeholder="Write a message..."
+        placeholder="Write your message here..."
       />
     </form>
   </div>
