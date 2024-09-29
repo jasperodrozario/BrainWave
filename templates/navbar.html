@@ -1,6 +1,6 @@
 {% load static %}
 <div class="flex justify-between items-center h-15 py-3 bg-theme-secondary">
-  <div class="flex-none mx-[5rem]">
+  <div class="flex-none ml-[5rem]">
     <a href="{% url 'home'%}">
       <div class="flex items-center">
         <img
@@ -8,21 +8,25 @@
           alt="Image not loaded"
           class="w-11 h-11 mr-3"
         />
-
-        <p class="font-bold text-lg text-[#D8DAE8]">brainwave</p>
+        <p class="font-bold text-xl text-[#D8DAE8]">brainwave</p>
       </div>
     </a>
   </div>
 
-  <div class="flex-none min-w-96">
-    <form method="GET" action="{% url 'home' %}">
-      <input
-        class="h-9 w-full rounded-sm px-5 py-3 text-xs placeholder-subtle-white/25 bg-[#52526D]"
-        type="text"
-        name="q"
-        placeholder="Search for posts"
-      />
-    </form>
+  <div class="flex-none mx-[5rem] w-[30rem]">
+      <form method="GET" action="{% url 'home' %}">
+        <label class="flex items-center rounded gap-4 px-5 py-3 text-sm text-neutral-300 bg-[#52526D]">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-5 text-subtle-white/50">
+            <path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" />
+          </svg>
+          <input
+            class="bg-transparent border-none outline-none"
+            type="text"
+            name="q"
+            placeholder="Search for posts"
+          />
+        </label>
+      </form>
   </div>
 
   {% if request.user.is_authenticated %}

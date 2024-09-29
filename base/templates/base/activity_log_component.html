@@ -20,8 +20,12 @@
           >{{message.room}}</a
         >"
       </p>
-      <div class="mx-[3px] mt-2 p-2 rounded bg-theme-primary">
-        <p class="text-xs text-subtle-white/75">{{message}}</p>
+      <div
+        class="break-words whitespace-normally mt-2 p-2 rounded bg-theme-primary mx-[3px]"
+      >
+        <p class="text-xs text-subtle-white/75">
+          {{message|truncatechars:100}}
+        </p>
       </div>
     </div>
     {% endfor %}

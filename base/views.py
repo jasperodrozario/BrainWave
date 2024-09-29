@@ -20,6 +20,7 @@ from urllib.parse import unquote_plus
 
 def loginUser(request):
   page = 'login'
+  context = {'page': page}
 
   if request.user.is_authenticated:
     return redirect('home')
@@ -27,10 +28,15 @@ def loginUser(request):
   if request.method == 'POST':
     username = request.POST.get('username').lower()
     password = request.POST.get('password')
+
+    if username == '' or password == '':
+      messages.error(request, "Fields cannot be empty.")
+      return render(request, 'base/login_form.html', context)
     try:
       user = User.objects.get(username=username)
     except:
       messages.error(request, "Username does not exist. Sign up to create a new account.")
+      return render(request, 'base/login_form.html', context)
     
     user = authenticate(request, username=username, password=password)
     if user is not None:
@@ -38,7 +44,6 @@ def loginUser(request):
       return redirect('home')
     else:
       messages.error(request, 'Incorrect username or password.')
-  context = {'page': page}
   return render(request, 'base/login_form.html', context)
 
 def logoutUser(request):
@@ -57,7 +62,13 @@ def registerUser(request):
       login(request, user)
       return redirect('home')
     else:
-      messages.error(request, 'Something went wrong. Please try again.')
+      if 'password2' in form.errors:
+        messages.error(request, "*"+form.errors['password2'])
+      elif 'username' in form.errors:
+        messages.error(request, "*"+form.errors['username'])
+      else:
+        messages.error(request, "*"+form.errors)
+
   return render(request, 'base/login_form.html', context)
 
 def home(request):
@@ -101,7 +112,6 @@ def room(request, pk):
   room = Room.objects.get(id=pk)
   participants = room.participants.all()
   participant_count = participants.count()
-
   if request.method == 'POST':
     Message.objects.create(
       user = request.user,
@@ -127,7 +137,7 @@ def userProfile(request, pk):
 @login_required(login_url='login')
 def createRoom(request):
   form = RoomForm()
-  context = {'form': form}
+  context = {'form': form, 'create_page': True}
   if request.method == 'POST':
     form = RoomForm(request.POST)
     if form.is_valid:
@@ -137,10 +147,11 @@ def createRoom(request):
       return redirect('home')
   return render(request, 'base/room_form.html', context)
 
+@login_required(login_url='login')
 def updateRoom(request, pk):
   room = Room.objects.get(id=pk)
   form = RoomForm(instance=room)
-  context = {'form':form}
+  context = {'form':form, 'room': room}
   if request.method == 'POST':
     form = RoomForm(request.POST, instance=room)
     if form.is_valid:
@@ -148,6 +159,7 @@ def updateRoom(request, pk):
       return redirect('home')
   return render(request, 'base/room_form.html', context)
 
+@login_required(login_url='login')
 def deleteRoom(request, pk):
   room = Room.objects.get(id=pk)
   if request.method == 'POST':
@@ -155,6 +167,7 @@ def deleteRoom(request, pk):
     return redirect('home')
   return render(request, 'base/delete.html', {'obj':room})
 
+@login_required(login_url='login')
 def deleteMessage(request, pk):
   message = Message.objects.get(id=pk)
   if request.method == 'POST':

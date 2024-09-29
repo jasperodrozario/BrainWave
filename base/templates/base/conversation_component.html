@@ -1,34 +1,123 @@
-<div class="relative h-full bg-theme-secondary text-subtle-white">
-  <div class="px-4 py-2 bg-light-lavender">
-    <h3 class="text-lg">Conversations</h3>
+<div class="pb-[8.5rem] h-full bg-theme-secondary text-subtle-white">
+  <div class="flex items-center w-full px-4 py-2 bg-light-lavender">
+    <a href="{% url 'home' %}" class="mr-2 hover:text-orange-400">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+        class="size-4"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M14 8a.75.75 0 0 1-.75.75H4.56l3.22 3.22a.75.75 0 1 1-1.06 1.06l-4.5-4.5a.75.75 0 0 1 0-1.06l4.5-4.5a.75.75 0 0 1 1.06 1.06L4.56 7.25h8.69A.75.75 0 0 1 14 8Z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </a>
+
+    <h3 class="text-subtle-white font-semibold text-sm">STUDY ROOM</h3>
   </div>
-  <div id="scrollableDiv" class="relative overflow-y-auto h-[82%] px-4 pt-5">
+
+  <!-- Room details section -->
+  <div class="m-5">
+    <img src="" alt="" />
+    <h1 class="mb-2 text-orange-400 text-2xl">{{room.name}}</h1>
+    <p class="mb-[2px] text-subtle-white/75 text-xs font-semibold">HOSTED BY</p>
+    <a
+      class="text-sm text-orange-400 hover:underline"
+      href="{% url 'user-profile' room.host.id %}"
+    >
+      @{{room.host}}
+    </a>
+    <p
+      class="text-center my-2 px-3 py-1 rounded-xl text-subtle-white/75 text-xs font-bold bg-[#525369]"
+    >
+      {{room.topic.name}}
+    </p>
+  </div>
+
+  <!-- Messaging section -->
+  <div
+    id="scrollableDiv"
+    class="m-5 mb-2 bg-theme-primary overflow-y-auto rounded-lg h-[82%]"
+  >
     {% for message in room_messages %}
-    <div>
-      {% if request.user == message.user %}
-      <a href="{% url 'delete-message' message.id %}">Delete</a>
-      {% endif %}
-      <p class="text-xs">
-        <a href="{% url 'user-profile' message.user.id %}">@{{message.user}}</a>
-        | {{message.created|timesince}} ago
-      </p>
-      <p>{{message}}</p>
-      <br />
+    <div
+      class="my-6 mx-5 py-2 px-3 break-words whitespace-normally text-subtle-white/75 border-subtle-white/75 border-l-[1px]"
+    >
+      <div class="flex justify-between items-center h-auto">
+        <p class="text-xs">
+          <a
+            href="{% url 'user-profile' message.user.id %}"
+            class="text-orange-400"
+            >@{{message.user}}</a
+          >&nbsp;&nbsp;&nbsp;{{message.created|timesince}} ago
+        </p>
+        {% if request.user == message.user %}
+        <div>
+          <a
+            href="{% url 'delete-message' message.id %}"
+            class="text-xs text-subtle-white/75 hover:text-red-400"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="size-5"
+            >
+              <path
+                d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z"
+              />
+            </svg>
+          </a>
+        </div>
+        {% endif %}
+      </div>
+      <p class="leading-5">{{message}}</p>
     </div>
     {% endfor %}
   </div>
-
   {% if request.user.is_authenticated %}
-  <div class="absolute bottom-0 p-4 w-full">
+  <div class="mx-5">
     <form class="flex justify-center" method="POST">
       {% csrf_token %}
       <input
-        class="flex-none rounded text-md w-full p-2 pl-4 h-10 bg-[#52526D]"
+        class="flex-none rounded-lg text-md w-full p-2 pl-4 h-10 outline-none bg-[#52526D]"
         name="message_box"
         type="text"
         placeholder="Write your message here..."
       />
     </form>
+  </div>
+  {% else %}
+  <div
+    class="relative w-100% bg-black bg-opacity-20 backdrop-blur-lg pt-32 rounded-lg h-[40rem] bottom-[15rem]"
+  >
+    <div class="font-bold"></div>
+    <div class="flex justify-center items-center">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+        class="size-4"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M8 1a3.5 3.5 0 0 0-3.5 3.5V7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7V4.5A3.5 3.5 0 0 0 8 1Zm2 6V4.5a2 2 0 1 0-4 0V7h4Z"
+          clip-rule="evenodd"
+        />
+      </svg>
+      <span class="text-sm font-semibold text-subtle-white ml-2"
+        ><a href="{% url 'login' %}" class="underline hover:text-orange-400"
+          >Login</a
+        >
+        or
+        <a href="{% url 'register' %}" class="underline hover:text-orange-400"
+          >Sign Up</a
+        >
+        to join the room.</span
+      >
+    </div>
   </div>
   {% endif %}
 </div>

@@ -1,34 +1,76 @@
 {% extends 'main.html' %} {% block content %} {% load widget_tweaks %}
-
-<div class="flex justify-center mt-[4%]">
-  <div class="bg-theme-secondary px-5 py-3 rounded">
-    <form method="POST">
-      {% csrf_token %}
+<div class="flex justify-center mt-12 mb-16 mx-6">
+  <div>
+    <div class="flex items-center p-2 bg-light-lavender text-subtle-white">
+      <a href="{{ request.META.HTTP_REFERER }}" class="mx-2 hover:text-orange-400">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+          <path fill-rule="evenodd" d="M14 8a.75.75 0 0 1-.75.75H4.56l3.22 3.22a.75.75 0 1 1-1.06 1.06l-4.5-4.5a.75.75 0 0 1 0-1.06l4.5-4.5a.75.75 0 0 1 1.06 1.06L4.56 7.25h8.69A.75.75 0 0 1 14 8Z" clip-rule="evenodd" />
+        </svg>
+      </a>
+      <p class="font-semibold text-sm">CREATE/UPDATE STUDY ROOM</p>
+    </div>
+    <div class="bg-theme-secondary px-5 py-3 rounded">
+      <form method="POST">
+        {% csrf_token %}
   
-      <div class="my-3">
-        <label for="id_topic" class="text-sm text-subtle-white font-semibold">Topic</label>
-        <div class="mt-2">
-          {{ form.topic|add_class:"py-2 px-3 bg-theme-primary text-subtle-white/75 border rounded" }} {{ form.topic.errors }}
+        <div class="my-3">
+          <label for="id_topic" class="text-xs font-semibold text-subtle-white/75"
+            >Topic</label
+          >
+          <div class="mt-2">
+              {{ form.topic|add_class:"w-full py-2 px-3 bg-theme-primary text-subtle-white/75 border border-orange-400 rounded" }} {{ form.topic.errors }}
+          </div>
         </div>
-      </div>
   
-      <div class="my-3">
-        <label for="id_name" class="text-sm text-subtle-white font-semibold">Name</label>
-        <div class="mt-2">{{ form.name|add_class:"py-2 px-3 bg-theme-primary text-subtle-white/75 border rounded" }} {{ form.name.errors }}</div>
-      </div>
-  
-      <div class="my-3">
-        <label for="id_description" class="text-sm text-subtle-white font-semibold">Description</label>
-        <div class="mt-2">
-          {{ form.description|add_class:"py-2 px-3 bg-theme-primary text-subtle-white/75 border rounded h-[100px]" }} {{ form.description.errors}}
+        <div class="my-3">
+          <label for="id_name" class="text-xs font-semibold text-subtle-white/75"
+            >Name</label
+          >
+          <div class="mt-2">
+            {{ form.name|add_class:"w-full py-2 px-3 bg-theme-primary text-subtle-white/75 border border-orange-400 rounded" }} {{ form.name.errors }}
+          </div>
         </div>
-      </div>
-
-      <div class="flex justify-center">      
-        <button type="submit" class="text-subtle-white text-sm font-semibold bg-orange-500 rounded my-3 h-[35px] w-[90px]">Save</button>
-      </div>
-    </form>
+  
+        <div class="my-3">
+          <label for="id_description" class="text-xs font-semibold text-subtle-white/75">
+            Description
+          </label>
+          <div class="mt-2">
+            {{ form.description|add_class:"w-full py-2 px-3 bg-theme-primary text-subtle-white/75 border border-orange-400 rounded h-[100px]" }} 
+            {{form.description.errors}}
+          </div>
+        </div>
+        
+        {% if create_page %}
+        <div class="flex justify-center">
+          <button
+            type="submit"
+            class="text-subtle-white text-sm font-semibold bg-orange-500 rounded m-3 h-[35px] w-[90px]"
+          >
+            Create
+          </button>
+        </div>
+  
+        {% else %}
+        <div class="flex justify-center">
+          <a href="{% url 'delete-room' room.id %}"
+            type="submit"
+            class="flex justify-center items-center text-subtle-white text-sm font-semibold bg-red-500 rounded m-3 h-[35px] w-[90px]"
+          >
+            Delete
+          </a>
+          <button
+            type="submit"
+            class="text-subtle-white text-sm font-semibold bg-orange-500 rounded m-3 h-[35px] w-[90px]"
+          >
+            Save
+          </button>
+        </div>
+        {% endif %}
+  
+      </form>
+    </div>
   </div>
+  
 </div>
-
 {% endblock content %}

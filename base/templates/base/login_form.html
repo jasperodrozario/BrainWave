@@ -1,7 +1,7 @@
 {% extends 'main.html' %} {% block content %} {% load widget_tweaks %} 
 {% if page == 'login' %}
-<div class="flex justify-center mt-[4%]">
-  <div class="bg-theme-secondary px-5 py-5 rounded-lg text-sm text-subtle-white font-semibold">
+<div class="flex justify-center my-[5%]">
+  <div class="bg-theme-secondary w-[300px] px-5 py-5 rounded-lg text-sm text-subtle-white font-semibold">
     <h2 class="text-subtle-white text-xl font-bold mb-5">Login to brainwave</h2>
     <form method="POST">
       {% csrf_token %}
@@ -17,6 +17,11 @@
           <input type="password" name="password" placeholder="Enter Password" class="w-64 py-2 px-3 bg-theme-primary font-light text-subtle-white/75 border rounded "/>
         </div>
       </div>
+      {% if messages %}
+      {% for message in messages %}
+      <div class="text-[13px] m-2 font-medium text-red-500">{{ message }}</div>
+      {% endfor %}
+      {% endif %}
       <div class="text-center">
         <input
           class="text-subtle-white text-sm bg-orange-500 rounded my-3 w-full h-[35px]"
@@ -29,14 +34,42 @@
   </div>
 </div>
 {% else %}
-<div class="flex justify-center mt-[4%]">
-  <div>
-    <form method="POST" action="">
-      {% csrf_token %} {{form.as_p}}
-      <input type="submit" value="Sign up" />
+<div class="flex justify-center my-[4%]">
+  <div class="bg-theme-secondary w-[300px] px-5 py-5 rounded-lg text-sm text-subtle-white font-semibold">
+    <h2 class="text-subtle-white text-xl font-bold mb-1">Join the brainwave</h2>
+    <p class="font-medium mb-5">Create your account now</p>
+    <form method="POST">
+      {% csrf_token %} 
+      <div class="my-3">
+        <label>Username</label>
+        <div class="mt-2">
+          {{ form.username|add_class:"w-full py-2 px-3 bg-theme-primary text-subtle-white/75 border rounded" }}
+        </div>
+      </div>
+      <div class="my-3">
+        <label>Password</label>
+        <div class="mt-2">
+          {{ form.password1|add_class:"w-full py-2 px-3 bg-theme-primary text-subtle-white/75 border rounded" }}
+        </div>
+      </div>
+      <div class="my-3">
+        <label>Retype Password</label>
+        <div class="mt-2">
+          {{ form.password2|add_class:"w-full py-2 px-3 bg-theme-primary text-subtle-white/75 border rounded" }}
+        </div>
+      </div>
+      {% if messages %}
+      {% for message in messages %}
+      <div class="text-[13px] font-semibold text-red-400">{{ message }}</div>
+      {% endfor %}
+      {% else %}
+      <div class="text-[13px] my-2 font-semibold text-subtle-white">*Password must be atleast 8 characters</div>
+      {% endif %}
+      <div>
+        <input type="submit" value="Sign up" class="text-subtle-white text-sm bg-orange-500 rounded my-3 w-full h-[35px]" />
+        <p class="mt-4">Already have an account? <a href="{% url 'login' %}" class="text-orange-400 text-sm font-light hover:underline">Login</a></p>
+      </div>
     </form>
-    <p>Already have an account?</p>
-    <a href="{% url 'login' %}">Login</a>
   </div>
 </div>
 {% endif %} {% endblock content %}

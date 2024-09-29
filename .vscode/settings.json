@@ -1,11 +1,11 @@
 {
-    "workbench.sideBar.location": "right",
-    "workbench.statusBar.visible": true,
-    "workbench.startupEditor": "none",
-    "workbench.panel.defaultLocation": "right",
-    "workbench.activityBar.location": "default",
-    "workbench.list.defaultFindMatchType": "fuzzy",
-    "workbench.list.horizontalScrolling": false,
-    "workbench.reduceMotion": "auto",
-    "workbench.sash.size": 4
+  "workbench.sideBar.location": "right",
+  "workbench.statusBar.visible": true,
+  "workbench.startupEditor": "none",
+  "workbench.panel.defaultLocation": "right",
+  "workbench.activityBar.location": "default",
+  "workbench.list.defaultFindMatchType": "fuzzy",
+  "workbench.list.horizontalScrolling": false,
+  "workbench.reduceMotion": "auto",
+  "workbench.sash.size": 4
 }

@@ -1,18 +1,15 @@
 {% extends 'main.html' %} {% block content %}
 
 <div class="flex justify-center">
-  <!-- Room details container -->
-  <div class="fixed left-[5rem] w-[250px]">
-    {% include 'base/room_details_component.html' %}
-  </div>
-
   <!-- Conversation container -->
-  <div class="flex-none overflow-hidden rounded-lg mx-auto h-[35.5rem] w-[45%]">
+  <div
+    class="flex-none overflow-hidden rounded-lg mx-5 h-[40rem] w-[50%]"
+  >
     {% include 'base/conversation_component.html' %}
   </div>
 
   <!-- Participants container -->
-  <div class="fixed right-[5rem] w-[250px]">
+  <div class="flex-none mx-5 h-[40rem] w-[300px]">
     {% include 'base/participants_component.html' %}
   </div>
 </div>

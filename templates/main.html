@@ -10,8 +10,8 @@
   <body class="subpixel-antialiased bg-theme-primary pt-[6rem]">
     <!-- Navbar -->
     <nav class="fixed top-0 w-full z-[1000]">{% include 'navbar.html' %}</nav>
-    {% if messages %} {% for message in messages %} {{ message }} {% endfor %}
-    {% endif %}
+    <!-- {% if messages %} {% for message in messages %} {{ message }} {% endfor %}
+    {% endif %} -->
     <!-- Content -->
     <div>{% block content %} {% endblock %}</div>
     <script>

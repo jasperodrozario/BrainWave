@@ -10,6 +10,9 @@ module.exports = {
         "theme-primary": "#2C2D38",
         "theme-secondary": "#3F4054",
       },
+      fontFamily: {
+        sans: ['DM Sans', 'sans-serif'],
+      }
     },
   },
   plugins: [

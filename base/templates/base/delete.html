@@ -1,10 +1,32 @@
 {% extends 'main.html' %} {% block content %}
 
-<form method="POST" action="">
-  {% csrf_token %}
-  <p>Are you sure you want to delete "{{obj}}"?</p>
-  <a href="{{ request.META.HTTP_REFERER }}">Go Back</a>
-  <input type="submit" value="Confirm" />
-</form>
+<div class="flex justify-center break-words whitespace-normally my-[4%]">
+  <form method="POST" action="">
+    {% csrf_token %}
+    <div
+      class="rounded-md p-5 bg-theme-secondary text-subtle-white max-w-[20rem]"
+    >
+      <div class="text-center my-3">
+        <p class="mb-6">Are you sure you want to delete</p>
+        <p class="text-lg font-semibold">"{{obj|truncatechars:50}}"?</p>
+      </div>
+
+      <div class="flex justify-center mt-6">
+        <a
+          href="{{ request.META.HTTP_REFERER }}"
+          class="flex justify-center items-center text-subtle-white text-sm font-semibold bg-orange-500 rounded m-3 h-[35px] w-[90px]"
+        >
+          Go Back
+        </a>
+        <button
+          type="submit"
+          class="text-subtle-white text-sm font-semibold bg-red-500 rounded m-3 h-[35px] w-[90px]"
+        >
+          Confirm
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
 
 {% endblock %}
