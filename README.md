@@ -12,7 +12,6 @@ Make sure you have the following installed:
 
 - **Python 3.x**
 - **Node.js - npm (comes with Node.js), ensure you have it installed for managing the frontend dependencies**
-- A working **virtual environment** for Python.
 
 ## **Setup Instructions**
 
