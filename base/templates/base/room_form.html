@@ -1,15 +1,15 @@
 {% extends 'main.html' %} {% block content %} {% load widget_tweaks %}
 <div class="flex justify-center mt-12 mb-16 mx-6">
-  <div>
+  <div class="rounded-lg overflow-hidden">
     <div class="flex items-center p-2 bg-light-lavender text-subtle-white">
-      <a href="{{ request.META.HTTP_REFERER }}" class="mx-2 hover:text-orange-400">
+      <a href="{{ request.META.HTTP_REFERER }}" class="mx-2 flex justify-center items-center w-7 h-6 rounded-full hover:text-orange-400 hover:bg-black/[10%]">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
           <path fill-rule="evenodd" d="M14 8a.75.75 0 0 1-.75.75H4.56l3.22 3.22a.75.75 0 1 1-1.06 1.06l-4.5-4.5a.75.75 0 0 1 0-1.06l4.5-4.5a.75.75 0 0 1 1.06 1.06L4.56 7.25h8.69A.75.75 0 0 1 14 8Z" clip-rule="evenodd" />
         </svg>
       </a>
       <p class="font-semibold text-sm">CREATE/UPDATE STUDY ROOM</p>
     </div>
-    <div class="bg-theme-secondary px-5 py-3 rounded">
+    <div class="bg-theme-secondary px-5 py-3">
       <form method="POST">
         {% csrf_token %}
   
@@ -71,6 +71,5 @@
       </form>
     </div>
   </div>
-  
 </div>
 {% endblock content %}

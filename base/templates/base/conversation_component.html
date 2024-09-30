@@ -1,6 +1,9 @@
-<div class="pb-[11rem] h-full bg-theme-secondary text-subtle-white">
+<div class="pb-[9rem] h-full bg-theme-secondary text-subtle-white">
   <div class="flex items-center w-full px-4 py-2 bg-light-lavender">
-    <a href="{% url 'home' %}" class="mr-2 hover:text-orange-400">
+    <a
+      href="{% url 'home' %}"
+      class="flex justify-center items-center w-7 h-6 rounded-full hover:text-orange-400 hover:bg-black/[10%]"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 16 16"
@@ -15,13 +18,20 @@
       </svg>
     </a>
 
-    <h3 class="text-subtle-white font-semibold text-sm">STUDY ROOM</h3>
+    <h3 class="ml-1 text-subtle-white font-semibold text-sm">STUDY ROOM</h3>
   </div>
 
   <!-- Room details section -->
   <div class="m-5">
     <img src="" alt="" />
-    <h1 class="mb-2 text-orange-400 text-2xl">{{room.name}}</h1>
+    <div class="flex justify-between items-center">
+      <h1 class="mb-2 text-orange-400 text-2xl">{{room.name}}</h1>
+      <p
+        class="text-center my-2 px-3 py-1 rounded-xl text-subtle-white/75 text-xs font-bold bg-[#525369]"
+      >
+        {{room.topic.name}}
+      </p>
+    </div>
     <p class="mb-[2px] text-subtle-white/75 text-xs font-semibold">HOSTED BY</p>
     <a
       class="text-sm text-orange-400 hover:underline"
@@ -29,13 +39,7 @@
     >
       @{{room.host}}
     </a>
-    <p
-      class="text-center my-2 px-3 py-1 rounded-xl text-subtle-white/75 text-xs font-bold bg-[#525369]"
-    >
-      {{room.topic.name}}
-    </p>
   </div>
-
   <!-- Messaging section -->
   <div
     id="scrollableDiv"
@@ -107,16 +111,16 @@
           clip-rule="evenodd"
         />
       </svg>
-      <span class="text-sm font-semibold text-subtle-white ml-2"
-        ><a href="{% url 'login' %}" class="underline hover:text-orange-400"
-          >Login</a
-        >
+      <span class="text-sm font-semibold text-subtle-white ml-2">
+        <a href="{% url 'login' %}" class="underline hover:text-orange-400"
+          >Login
+        </a>
         or
         <a href="{% url 'register' %}" class="underline hover:text-orange-400"
-          >Sign Up</a
-        >
-        to join the room.</span
-      >
+          >Sign Up
+        </a>
+        to join the room.
+      </span>
     </div>
   </div>
   {% endif %}
