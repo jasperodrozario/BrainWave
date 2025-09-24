@@ -19,7 +19,7 @@ Make sure you have the following installed:
 First, clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/yourusername/yourproject.git
+git clone https://github.com/jasperodrozario/BrainWave.git
 cd yourproject
 ```
 
