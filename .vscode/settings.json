@@ -1,5 +1,5 @@
 {
-  "workbench.sideBar.location": "right",
+  "workbench.sideBar.location": "left",
   "workbench.statusBar.visible": true,
   "workbench.startupEditor": "none",
   "workbench.panel.defaultLocation": "right",
