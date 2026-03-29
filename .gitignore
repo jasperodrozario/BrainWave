@@ -1,1 +1,3 @@
 discloneenv/
+node_modules
+.vscode
